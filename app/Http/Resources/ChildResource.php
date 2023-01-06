@@ -15,11 +15,11 @@ class ChildResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'first_name' => $this->first_name,
-            'parent_id' => $this->child_parent_id,
-            'classroom_id' => $this->classroom_id,
+            'firstName' => $this->first_name,
+            'parentId' => $this->child_parent_id,
+            'classroomId' => $this->classroom_id,
             'status' => $this->status,
-            'birth_date' => $this->birth_date
+            'birthDate' => $this->birth_date
         ];
     }
 }
