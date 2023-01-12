@@ -5,19 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LineSupervisor extends Model
+class Guardian extends Model
 {
     use HasFactory;
-
 
     protected $fillable = [
         'first_name',
         'last_name',
-        'ready_status'
+        'address',
+        'phone_number',
+        'balance'
     ];
 
-    public function busLine()
+    public function children()
     {
-        return $this->hasOne(BusLine::class);
+        return $this->hasMany(Child::class);
     }
 }

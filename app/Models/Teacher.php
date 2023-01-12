@@ -9,7 +9,16 @@ class Teacher extends Model
 {
     use HasFactory;
 
-    public function classroom() {
-        return $this->hasOne(Teacher::class);
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'birth_date',
+        'address',
+        'phone_number'
+    ];
+
+    public function classroom()
+    {
+        return $this->hasOne(Classroom::class);
     }
 }

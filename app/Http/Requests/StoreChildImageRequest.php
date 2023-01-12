@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreLineSupervisorRequest extends FormRequest
+class StoreChildImageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,8 @@ class StoreLineSupervisorRequest extends FormRequest
     public function rules()
     {
         return [
-            'firstName' => ['required', 'string'],
-            'lastName' => ['required', 'string'],
-            'readyStatus' => ['required', 'boolean']
+            'child_id' => ['required', 'integer', 'exists:children,id', 'unique:child_images,child_id'],
+            'image' => ['required', 'file', 'image', 'max:2048']
         ];
     }
 
@@ -34,16 +33,8 @@ class StoreLineSupervisorRequest extends FormRequest
     {
         $merge = [];
 
-        if ($this->has('firstName')) {
-            $merge['first_name'] = $this->get('firstName');
-        }
-
-        if ($this->has('lastName')) {
-            $merge['last_name'] = $this->get('lastName');
-        }
-
-        if ($this->has('readyStatus')) {
-            $merge['ready_status'] = $this->get('readyStatus');
+        if ($this->has('childId')) {
+            $merge['child_id'] = $this->get('childId');
         }
 
         $this->merge($merge);

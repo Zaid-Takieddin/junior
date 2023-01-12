@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateLineSupervisorRequest extends FormRequest
+class StoreGuardianRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,22 +23,13 @@ class UpdateLineSupervisorRequest extends FormRequest
      */
     public function rules()
     {
-        if ($this->isMethod('PUT')) {
-
-            return [
-                'firstName' => ['required', 'string'],
-                'lastName' => ['required', 'string'],
-                'readyStatus' => ['required', 'boolean']
-            ];
-        }
-
-        if ($this->isMethod('PATCH')) {
-            return [
-                'firstName' => ['sometimes', 'required', 'string'],
-                'lastName' => ['sometimes', 'required', 'string'],
-                'readyStatus' => ['sometimes', 'required', 'boolean']
-            ];
-        }
+        return [
+            'firstName' => ['required', 'string'],
+            'lastName' => ['required', 'string'],
+            'address' => ['required', 'string'],
+            'phoneNumber' => ['required', 'string', 'unique:guardians,phone_number'],
+            'balance' => ['required', 'numeric', 'min:50000']
+        ];
     }
 
     protected function prepareForValidation()
@@ -53,8 +44,8 @@ class UpdateLineSupervisorRequest extends FormRequest
             $merge['last_name'] = $this->get('lastName');
         }
 
-        if ($this->has('readyStatus')) {
-            $merge['ready_status'] = $this->get('readyStatus');
+        if ($this->has('phoneNumber')) {
+            $merge['phone_number'] = $this->get('phoneNumber');
         }
 
         $this->merge($merge);

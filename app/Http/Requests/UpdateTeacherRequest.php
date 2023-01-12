@@ -13,7 +13,7 @@ class UpdateTeacherRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,48 @@ class UpdateTeacherRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        if ($this->isMethod('PUT')) {
+
+            return [
+                'firstName' => ['required', 'string'],
+                'lastName' => ['required', 'string'],
+                'birthDate' => ['required', 'date'],
+                'address' => ['required', 'string'],
+                'phoneNumber' => ['required', 'string', 'unique:teachers,phone_number']
+            ];
+        }
+
+        if ($this->isMethod('PATCH')) {
+            return [
+                'firstName' => ['required', 'string'],
+                'lastName' => ['required', 'string'],
+                'birthDate' => ['required', 'date'],
+                'address' => ['required', 'string'],
+                'phoneNumber' => ['required', 'string', 'unique:teachers,phone_number']
+            ];
+        }
+    }
+
+    protected function prepareForValidation()
+    {
+        $merge = [];
+
+        if ($this->has('firstName')) {
+            $merge['first_name'] = $this->get('firstName');
+        }
+
+        if ($this->has('lastName')) {
+            $merge['last_name'] = $this->get('lastName');
+        }
+
+        if ($this->has('birthDate')) {
+            $merge['birth_date'] = $this->get('birthDate');
+        }
+
+        if ($this->has('phoneNumber')) {
+            $merge['phone_number'] = $this->get('phoneNumber');
+        }
+
+        $this->merge($merge);
     }
 }

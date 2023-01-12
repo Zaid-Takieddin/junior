@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\ChildParent;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreChildParentRequest;
-use App\Http\Requests\UpdateChildParentRequest;
-use App\Http\Resources\ChildParentCollection;
-use App\Http\Resources\ChildParentResource;
+use App\Models\Drink;
+use App\Http\Requests\StoreDrinkRequest;
+use App\Http\Requests\UpdateDrinkRequest;
 
-class ChildParentController extends Controller
+class DrinkController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +16,7 @@ class ChildParentController extends Controller
      */
     public function index()
     {
-        return new ChildParentCollection(ChildParent::all());
+        //
     }
 
     /**
@@ -34,10 +32,10 @@ class ChildParentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreChildParentRequest  $request
+     * @param  \App\Http\Requests\StoreDrinkRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreChildParentRequest $request)
+    public function store(StoreDrinkRequest $request)
     {
         //
     }
@@ -45,21 +43,21 @@ class ChildParentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ChildParent  $childParent
+     * @param  \App\Models\Drink  $drink
      * @return \Illuminate\Http\Response
      */
-    public function show(ChildParent $childParent)
+    public function show(Drink $drink)
     {
-        return new ChildParentResource($childParent);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ChildParent  $childParent
+     * @param  \App\Models\Drink  $drink
      * @return \Illuminate\Http\Response
      */
-    public function edit(ChildParent $childParent)
+    public function edit(Drink $drink)
     {
         //
     }
@@ -67,11 +65,11 @@ class ChildParentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateChildParentRequest  $request
-     * @param  \App\Models\ChildParent  $childParent
+     * @param  \App\Http\Requests\UpdateDrinkRequest  $request
+     * @param  \App\Models\Drink  $drink
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateChildParentRequest $request, ChildParent $childParent)
+    public function update(UpdateDrinkRequest $request, Drink $drink)
     {
         //
     }
@@ -79,10 +77,10 @@ class ChildParentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ChildParent  $childParent
+     * @param  \App\Models\Drink  $drink
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ChildParent $childParent)
+    public function destroy(Drink $drink)
     {
         //
     }

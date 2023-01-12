@@ -8,6 +8,7 @@ use App\Http\Requests\StoreChildRequest;
 use App\Http\Requests\UpdateChildRequest;
 use App\Http\Resources\ChildCollection;
 use App\Http\Resources\ChildResource;
+use App\Models\Classroom;
 
 class ChildController extends Controller
 {
@@ -18,7 +19,7 @@ class ChildController extends Controller
      */
     public function index()
     {
-        return new ChildCollection(Child::with('childParent')->get());
+        return new ChildCollection(Child::all());
     }
 
     /**
@@ -39,7 +40,13 @@ class ChildController extends Controller
      */
     public function store(StoreChildRequest $request)
     {
-        //
+        $classroom = Classroom::findOrFail($request->classroom_id);
+        $childrenInClass = $classroom->loadMissing('children')->children->count();
+        if ($childrenInClass < 10) {
+            return new ChildResource(Child::create($request->all()));
+        } else {
+            return 'Creation failed. Maximum children in class has been reached';
+        }
     }
 
     /**
@@ -50,7 +57,7 @@ class ChildController extends Controller
      */
     public function show(Child $child)
     {
-        return new ChildResource($child);
+        return new ChildResource($child->loadMissing(['guardian', 'classroom', 'image']));
     }
 
     /**
@@ -73,7 +80,17 @@ class ChildController extends Controller
      */
     public function update(UpdateChildRequest $request, Child $child)
     {
-        //
+        if ($request->classroom_id === $child->classroom_id) {
+            return $child->updateOrFail($request->all());
+        } else {
+            $classroom = Classroom::findOrFail($request->classroom_id);
+            $childrenInClass = $classroom->loadMissing('children')->children->count();
+            if ($childrenInClass < 10) {
+                return $child->updateOrFail($request->all());
+            } else {
+                return 'Update failed. Maximum children in class has been reached';
+            }
+        }
     }
 
     /**
@@ -84,6 +101,6 @@ class ChildController extends Controller
      */
     public function destroy(Child $child)
     {
-        //
+        return $child->deleteOrFail();
     }
 }

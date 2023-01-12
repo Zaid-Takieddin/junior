@@ -39,7 +39,7 @@ class LineSupervisorController extends Controller
      */
     public function store(StoreLineSupervisorRequest $request)
     {
-        //
+        return new LineSupervisorResource(LineSupervisor::create($request->all()));
     }
 
     /**
@@ -50,7 +50,7 @@ class LineSupervisorController extends Controller
      */
     public function show(LineSupervisor $lineSupervisor)
     {
-        return new LineSupervisorResource($lineSupervisor);
+        return new LineSupervisorResource($lineSupervisor->loadMissing('busLine'));
     }
 
     /**
@@ -73,7 +73,7 @@ class LineSupervisorController extends Controller
      */
     public function update(UpdateLineSupervisorRequest $request, LineSupervisor $lineSupervisor)
     {
-        //
+        return $lineSupervisor->updateOrFail($request->all());
     }
 
     /**
@@ -84,6 +84,6 @@ class LineSupervisorController extends Controller
      */
     public function destroy(LineSupervisor $lineSupervisor)
     {
-        //
+        return $lineSupervisor->deleteOrFail();
     }
 }

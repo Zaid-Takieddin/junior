@@ -9,11 +9,18 @@ class Classroom extends Model
 {
     use HasFactory;
 
-    public function children() {
+    protected $fillable = [
+        'teacher_id',
+        'level'
+    ];
+
+    public function children()
+    {
         return $this->hasMany(Child::class);
     }
 
-    public function teacher() {
-        return $this->belongsTo(Classroom::class);
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
     }
 }

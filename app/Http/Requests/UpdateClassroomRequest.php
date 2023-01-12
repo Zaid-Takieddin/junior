@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateClassroomRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateClassroomRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +24,30 @@ class UpdateClassroomRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        if ($this->isMethod('PUT')) {
+
+            return [
+                'teacherId' => ['required', 'integer', 'exists:teachers,id', 'unique:classrooms,teacher_id'],
+                'level' => ['required', Rule::in(['KG1', 'KG2', 'KG3', 'kg1', 'kg2', 'kg3'])]
+            ];
+        }
+
+        if ($this->isMethod('PATCH')) {
+            return [
+                'teacherId' => ['sometimes', 'required', 'integer', 'exists:teachers,id', 'unique:classrooms,teacher_id'],
+                'level' => ['sometimes', 'required', Rule::in(['KG1', 'KG2', 'KG3', 'kg1', 'kg2', 'kg3'])]
+            ];
+        }
+    }
+
+    protected function prepareForValidation()
+    {
+        $merge = [];
+
+        if ($this->has('teacherId')) {
+            $merge['teacher_id'] = $this->get('teacherId');
+        }
+
+        $this->merge($merge);
     }
 }

@@ -5,19 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LineSupervisor extends Model
+class ChildImage extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'ready_status'
+        'child_id',
+        'image'
     ];
 
-    public function busLine()
+    public function child()
     {
-        return $this->hasOne(BusLine::class);
+        return $this->belongsTo(Child::class);
     }
 }

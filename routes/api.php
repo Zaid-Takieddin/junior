@@ -3,7 +3,8 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BusLineController;
 use App\Http\Controllers\Api\ChildController;
-use App\Http\Controllers\Api\ChildParentController;
+use App\Http\Controllers\Api\ChildImageController;
+use App\Http\Controllers\Api\GuardianController;
 use App\Http\Controllers\Api\ClassroomController;
 use App\Http\Controllers\Api\LineSupervisorController;
 use App\Http\Controllers\Api\TeacherController;
@@ -21,18 +22,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
+Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
 });
 
-Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
+Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::apiResource('children', ChildController::class);
-    Route::apiResource('parents', ChildParentController::class);
+    Route::apiResource('guardians', GuardianController::class);
     Route::apiResource('teachers', TeacherController::class);
     Route::apiResource('classrooms', ClassroomController::class);
     Route::apiResource('bus-lines', BusLineController::class);
     Route::apiResource('line-supervisors', LineSupervisorController::class);
+    Route::apiResource('child-images', ChildImageController::class)->except('update');
+    Route::post('/child-images/{id}', [ChildImageController::class, 'update']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 

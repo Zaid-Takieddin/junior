@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\LineSupervisor;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('bus_lines', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('line_supervisor_id');
+            $table->foreignIdFor(LineSupervisor::class);
             $table->string('name');
             $table->timestamps();
         });

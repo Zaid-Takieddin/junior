@@ -4,17 +4,31 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\ChildParent;
 
 class Child extends Model
 {
     use HasFactory;
 
-    public function childParent() {
-        return $this->belongsTo(ChildParent::class);
+    protected $fillable = [
+        'guardian_id',
+        'classroom_id',
+        'first_name',
+        'status',
+        'birth_date'
+    ];
+
+    public function guardian()
+    {
+        return $this->belongsTo(Guardian::class);
     }
-    
-    public function classroom() {
+
+    public function classroom()
+    {
         return $this->belongsTo(Classroom::class);
+    }
+
+    public function image()
+    {
+        return $this->hasOne(ChildImage::class);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\ChildParent;
+use App\Models\Guardian;
 use App\Models\Classroom;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,7 +19,7 @@ class ChildFactory extends Factory
     public function definition()
     {
         return [
-            'child_parent_id' => ChildParent::factory(),
+            'guardian_id' => Guardian::factory(),
             'classroom_id' => Classroom::factory(),
             'first_name' => $this->faker->firstName(),
             'status' => $this->faker->randomElement(['S', 'B', 'H']),

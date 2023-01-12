@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use League\CommonMark\Util\UrlEncoder;
 
 class ChildResource extends JsonResource
 {
@@ -16,10 +17,13 @@ class ChildResource extends JsonResource
     {
         return [
             'firstName' => $this->first_name,
-            'parentId' => $this->child_parent_id,
+            'guaridanId' => $this->guardian_id,
             'classroomId' => $this->classroom_id,
             'status' => $this->status,
-            'birthDate' => $this->birth_date
+            'birthDate' => $this->birth_date,
+            'guardian' => new GuardianResource($this->whenLoaded('guardian')),
+            'classroom' => new ClassroomResource($this->whenLoaded('classroom')),
+            'image' => $this->whenLoaded('image'),
         ];
     }
 }

@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Classroom;
-use App\Models\Guardian;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('children', function (Blueprint $table) {
+        Schema::create('guardians', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Guardian::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Classroom::class);
             $table->string('first_name');
-            $table->string('status');
-            $table->dateTime('birth_date');
+            $table->string('last_name');
+            $table->string('address');
+            $table->string('phone_number');
+            $table->float('balance');
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('children');
+        Schema::dropIfExists('guardians');
     }
 };

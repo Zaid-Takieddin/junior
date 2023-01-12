@@ -16,7 +16,9 @@ class ClassroomResource extends JsonResource
     {
         return [
             'teacherId' => $this->teacher_id,
-            'level' => $this->level
+            'level' => $this->level,
+            'teacher' => new TeacherResource($this->whenLoaded('teacher')),
+            'children' => new ChildCollection($this->whenLoaded('children'))
         ];
     }
 }

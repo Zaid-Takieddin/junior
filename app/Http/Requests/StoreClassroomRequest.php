@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreClassroomRequest extends FormRequest
@@ -13,7 +14,7 @@ class StoreClassroomRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,19 @@ class StoreClassroomRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'teacherId' => ['required', 'integer', 'exists:teachers,id'],
+            'level' => ['required', Rule::in(['KG1', 'KG2', 'KG3', 'kg1', 'kg2', 'kg3'])]
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $merge = [];
+
+        if ($this->has('teacherId')) {
+            $merge['teacher_id'] = $this->get('teacherId');
+        }
+
+        $this->merge($merge);
     }
 }

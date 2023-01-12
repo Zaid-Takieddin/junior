@@ -39,7 +39,7 @@ class ClassroomController extends Controller
      */
     public function store(StoreClassroomRequest $request)
     {
-        //
+        return new ClassroomResource(Classroom::create($request->all()));
     }
 
     /**
@@ -50,7 +50,7 @@ class ClassroomController extends Controller
      */
     public function show(Classroom $classroom)
     {
-        return new ClassroomResource($classroom);
+        return new ClassroomResource($classroom->load(['children', 'teacher']));
     }
 
     /**
@@ -73,7 +73,7 @@ class ClassroomController extends Controller
      */
     public function update(UpdateClassroomRequest $request, Classroom $classroom)
     {
-        //
+        return $classroom->updateOrFail($request->all());
     }
 
     /**
@@ -84,6 +84,6 @@ class ClassroomController extends Controller
      */
     public function destroy(Classroom $classroom)
     {
-        //
+        return $classroom->deleteOrFail();
     }
 }
