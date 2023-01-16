@@ -17,7 +17,9 @@ class SnackFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name(),
+            'description' => $this->faker->text(),
+            'price' => $this->faker->numberBetween(700, 20500)
         ];
     }
 }

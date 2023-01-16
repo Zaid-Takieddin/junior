@@ -80,16 +80,20 @@ class ChildController extends Controller
      */
     public function update(UpdateChildRequest $request, Child $child)
     {
-        if ($request->classroom_id === $child->classroom_id) {
-            return $child->updateOrFail($request->all());
-        } else {
-            $classroom = Classroom::findOrFail($request->classroom_id);
-            $childrenInClass = $classroom->loadMissing('children')->children->count();
-            if ($childrenInClass < 10) {
+        if ($request->has('classroom_id')) {
+            if ($request->classroom_id === $child->classroom_id) {
                 return $child->updateOrFail($request->all());
             } else {
-                return 'Update failed. Maximum children in class has been reached';
+                $classroom = Classroom::findOrFail($request->classroom_id);
+                $childrenInClass = $classroom->loadMissing('children')->children->count();
+                if ($childrenInClass < 10) {
+                    return $child->updateOrFail($request->all());
+                } else {
+                    return 'Update failed. Maximum children in class has been reached';
+                }
             }
+        } else {
+            return $child->updateOrFail($request->all());
         }
     }
 

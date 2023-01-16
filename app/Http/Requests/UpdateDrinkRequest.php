@@ -13,7 +13,7 @@ class UpdateDrinkRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,21 @@ class UpdateDrinkRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        if ($this->isMethod('PUT')) {
+
+            return [
+                'name' => ['required', 'string', 'unique:snacks,name'],
+                'description' => ['required', 'string'],
+                'price' => ['required', 'numeric']
+            ];
+        }
+
+        if ($this->isMethod('PATCH')) {
+            return [
+                'name' => ['sometimes', 'required', 'string', 'unique:snacks,name'],
+                'description' => ['sometimes', 'required', 'string'],
+                'price' => ['sometimes', 'required', 'numeric']
+            ];
+        }
     }
 }

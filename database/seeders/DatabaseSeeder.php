@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
             GuardianSeeder::class,
             // ClassroomSeeder::class,
             ChildSeeder::class,
-            BusLineSeeder::class
+            BusLineSeeder::class,
+            DrinkSeeder::class,
+            SnackSeeder::class
         ]);
     }
 }

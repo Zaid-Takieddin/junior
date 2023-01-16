@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('bus_lines', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(LineSupervisor::class);
-            $table->string('name');
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }

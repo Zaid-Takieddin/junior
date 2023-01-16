@@ -13,7 +13,7 @@ class StoreSnackRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,20 @@ class StoreSnackRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'string', 'unique:snacks,name'],
+            'description' => ['required', 'string'],
+            'price' => ['required', 'numeric']
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $merge = [];
+
+        if ($this->has('description')) {
+            $merge['description'] = preg_replace('/\s+/', '', $this->input('description'));
+        }
+
+        $this->merge($merge);
     }
 }

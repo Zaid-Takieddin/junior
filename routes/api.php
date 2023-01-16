@@ -6,7 +6,9 @@ use App\Http\Controllers\Api\ChildController;
 use App\Http\Controllers\Api\ChildImageController;
 use App\Http\Controllers\Api\GuardianController;
 use App\Http\Controllers\Api\ClassroomController;
+use App\Http\Controllers\Api\DrinkController;
 use App\Http\Controllers\Api\LineSupervisorController;
+use App\Http\Controllers\Api\SnackController;
 use App\Http\Controllers\Api\TeacherController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +36,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::apiResource('classrooms', ClassroomController::class);
     Route::apiResource('bus-lines', BusLineController::class);
     Route::apiResource('line-supervisors', LineSupervisorController::class);
+    Route::apiResource('snacks', SnackController::class);
+    Route::apiResource('drinks', DrinkController::class);
     Route::apiResource('child-images', ChildImageController::class)->except('update');
     Route::post('/child-images/{id}', [ChildImageController::class, 'update']);
     Route::post('/logout', [AuthController::class, 'logout']);

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Drink;
 use App\Http\Requests\StoreDrinkRequest;
 use App\Http\Requests\UpdateDrinkRequest;
+use App\Http\Resources\DrinkCollection;
+use App\Http\Resources\DrinkResource;
 
 class DrinkController extends Controller
 {
@@ -16,7 +18,7 @@ class DrinkController extends Controller
      */
     public function index()
     {
-        //
+        return new DrinkCollection(Drink::all());
     }
 
     /**
@@ -37,7 +39,7 @@ class DrinkController extends Controller
      */
     public function store(StoreDrinkRequest $request)
     {
-        //
+        return new DrinkResource(Drink::create($request->all()));
     }
 
     /**
@@ -48,7 +50,7 @@ class DrinkController extends Controller
      */
     public function show(Drink $drink)
     {
-        //
+        return new DrinkResource($drink);
     }
 
     /**
@@ -71,7 +73,7 @@ class DrinkController extends Controller
      */
     public function update(UpdateDrinkRequest $request, Drink $drink)
     {
-        //
+        return $drink->updateOrFail($request->all());
     }
 
     /**
@@ -82,6 +84,6 @@ class DrinkController extends Controller
      */
     public function destroy(Drink $drink)
     {
-        //
+        return $drink->deleteOrFail();
     }
 }

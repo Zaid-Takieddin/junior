@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Snack;
 use App\Http\Requests\StoreSnackRequest;
 use App\Http\Requests\UpdateSnackRequest;
+use App\Http\Resources\SnackCollection;
+use App\Http\Resources\SnackResource;
 
 class SnackController extends Controller
 {
@@ -16,7 +18,7 @@ class SnackController extends Controller
      */
     public function index()
     {
-        //
+        return new SnackCollection(Snack::all());
     }
 
     /**
@@ -37,7 +39,7 @@ class SnackController extends Controller
      */
     public function store(StoreSnackRequest $request)
     {
-        //
+        return new SnackResource(Snack::create($request->all()));
     }
 
     /**
@@ -48,7 +50,7 @@ class SnackController extends Controller
      */
     public function show(Snack $snack)
     {
-        //
+        return new SnackResource($snack);
     }
 
     /**
@@ -71,7 +73,7 @@ class SnackController extends Controller
      */
     public function update(UpdateSnackRequest $request, Snack $snack)
     {
-        //
+        return $snack->updateOrFail($request->all());
     }
 
     /**
@@ -82,6 +84,6 @@ class SnackController extends Controller
      */
     public function destroy(Snack $snack)
     {
-        //
+        return $snack->deleteOrFail();
     }
 }

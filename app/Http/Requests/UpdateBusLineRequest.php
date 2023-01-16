@@ -23,8 +23,30 @@ class UpdateBusLineRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        if ($this->isMethod('PUT')) {
+
+            return [
+                'lineSupervisorId' => ['required', 'integer', 'exists:line_supervisors,id'],
+                'name' => ['required', 'string', 'unique:bus_lines,name']
+            ];
+        }
+
+        if ($this->isMethod('PATCH')) {
+            return [
+                'lineSupervisorId' => ['sometimes', 'required', 'integer', 'exists:line_supervisors,id'],
+                'name' => ['sometimes', 'required', 'string', 'unique:bus_lines,name']
+            ];
+        }
+    }
+
+    protected function prepareForValidation()
+    {
+        $merge = [];
+
+        if ($this->has('lineSupervisorId')) {
+            $merge['line_supervisor_id'] = $this->get('lineSupervisorId');
+        }
+
+        $this->merge($merge);
     }
 }
