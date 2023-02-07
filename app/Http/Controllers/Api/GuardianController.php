@@ -50,7 +50,7 @@ class GuardianController extends Controller
      */
     public function show(Guardian $guardian)
     {
-        return new GuardianResource($guardian->loadMissing('children'));
+        return new GuardianResource($guardian->loadMissing(['children', 'orders']));
     }
 
     /**

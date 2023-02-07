@@ -15,12 +15,14 @@ class GuardianResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'firstName' => $this->first_name,
             'LastName' => $this->last_name,
             'address' => $this->address,
             'phoneNumber' => $this->phone_number,
             'balance' => $this->balance,
-            'children' => new ChildCollection($this->whenLoaded('children'))
+            'children' => new ChildCollection($this->whenLoaded('children')),
+            'orders' => new OrderCollection($this->whenLoaded('orders'))
         ];
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Order;
 use Illuminate\Database\Seeder;
 
 class OrderSeeder extends Seeder
@@ -14,6 +14,8 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Order::factory()
+            ->count(25)
+            ->create();
     }
 }

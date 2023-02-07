@@ -21,4 +21,9 @@ class Guardian extends Model
     {
         return $this->hasMany(Child::class);
     }
+
+    public function orders()
+    {
+        return $this->hasManyThrough(Order::class, Child::class);
+    }
 }

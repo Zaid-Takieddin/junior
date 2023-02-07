@@ -15,6 +15,7 @@ class ClassroomResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'teacherId' => $this->teacher_id,
             'level' => $this->level,
             'teacher' => new TeacherResource($this->whenLoaded('teacher')),

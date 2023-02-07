@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Http\Resources\OrderCollection;
+use App\Http\Resources\OrderResource;
+use App\Models\FoodOrder;
 
 class OrderController extends Controller
 {
@@ -16,7 +19,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return new OrderCollection(Order::all());
     }
 
     /**
@@ -37,7 +40,26 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-        //
+        $order = Order::create($request->except('food'));
+        $food = $request->input('food');
+        // dd($order->id);
+        $pivotData = [];
+        // $attachedIds = [];
+        foreach ($food as $single_food) {
+            // dd($single_food['id']);
+            $pivotData['order_id'] = $order->id;
+            $pivotData['food_id'] = $single_food['id'];
+            $pivotData['price'] = $single_food['price'];
+            // array_push($attachedIds, $single_food['id']);
+            FoodOrder::create($pivotData);
+        }
+        // dd($attachedIds);
+        // FoodOrder::create($pivotData);
+        $attachedIds = FoodOrder::where('order_id', $order->id)->get()->map->only('id', 'price');
+        // dd($attachedIds);
+        $order->items()->attach($attachedIds);
+        return new OrderResource($order);
+        // return new OrderResource(Order::create($request->all()));
     }
 
     /**
@@ -48,7 +70,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return new OrderResource($order->loadMissing('items'));
     }
 
     /**
@@ -71,7 +93,7 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, Order $order)
     {
-        //
+        return $order->updateOrFail($request->all());
     }
 
     /**
@@ -82,6 +104,6 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        return $order->deleteOrFail();
     }
 }

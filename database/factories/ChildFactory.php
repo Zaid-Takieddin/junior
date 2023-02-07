@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Guardian;
 use App\Models\Classroom;
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,7 +24,7 @@ class ChildFactory extends Factory
             'classroom_id' => Classroom::factory(),
             'first_name' => $this->faker->firstName(),
             'status' => $this->faker->randomElement(['S', 'B', 'H']),
-            'birth_date' => $this->faker->date()
+            'birth_date' => $this->faker->date(),
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSnackRequest extends FormRequest
+class UpdateFoodRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class UpdateSnackRequest extends FormRequest
         if ($this->isMethod('PUT')) {
 
             return [
-                'name' => ['required', 'string', 'unique:snacks,name'],
+                'name' => ['required', 'string', 'unique:foods,name'],
                 'description' => ['required', 'string'],
                 'price' => ['required', 'numeric']
             ];
@@ -34,10 +34,21 @@ class UpdateSnackRequest extends FormRequest
 
         if ($this->isMethod('PATCH')) {
             return [
-                'name' => ['sometimes', 'required', 'string', 'unique:snacks,name'],
+                'name' => ['sometimes', 'required', 'string', 'unique:foods,name'],
                 'description' => ['sometimes', 'required', 'string'],
                 'price' => ['sometimes', 'required', 'numeric']
             ];
         }
+    }
+
+    protected function prepareForValidation()
+    {
+        $merge = [];
+
+        if ($this->has('description')) {
+            $merge['description'] = preg_replace('/\s+/', '', $this->input('description'));
+        }
+
+        $this->merge($merge);
     }
 }

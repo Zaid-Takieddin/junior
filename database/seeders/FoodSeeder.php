@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Snack;
+use App\Models\Food;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class SnackSeeder extends Seeder
+class FoodSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class SnackSeeder extends Seeder
      */
     public function run()
     {
-        Snack::factory()
+        Food::factory()
             ->count(25)
             ->create();
     }

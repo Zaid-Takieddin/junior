@@ -13,7 +13,7 @@ class UpdateOrderRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,35 @@ class UpdateOrderRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        if ($this->isMethod('PUT')) {
+
+            return [
+                'childId' => ['required', 'integer', 'exists:children,id',],
+                'totalPrice' => ['required', 'numeric']
+            ];
+        }
+
+        if ($this->isMethod('PATCH')) {
+            return [
+                'childId' => ['sometimes', 'required', 'integer', 'exists:children,id',],
+                'totalPrice' => ['sometimes', 'required', 'numeric']
+            ];
+        }
+    }
+
+    protected function prepareForValidation()
+    {
+
+        $merge = [];
+
+        if ($this->has('childId')) {
+            $merge['child_id'] = $this->input('childId');
+        }
+
+        if ($this->has('totalPrice')) {
+            $merge['total_price'] = $this->input('totalPrice');
+        }
+
+        $this->merge($merge);
     }
 }

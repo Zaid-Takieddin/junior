@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateChildRequest;
 use App\Http\Resources\ChildCollection;
 use App\Http\Resources\ChildResource;
 use App\Models\Classroom;
+use Illuminate\Http\Request;
 
 class ChildController extends Controller
 {
@@ -17,8 +18,9 @@ class ChildController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        // dd($request->user()->tokenCan('children:view'));
         return new ChildCollection(Child::all());
     }
 
@@ -57,7 +59,7 @@ class ChildController extends Controller
      */
     public function show(Child $child)
     {
-        return new ChildResource($child->loadMissing(['guardian', 'classroom', 'image']));
+        return new ChildResource($child->loadMissing(['guardian', 'classroom', 'image', 'orders']));
     }
 
     /**

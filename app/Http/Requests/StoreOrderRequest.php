@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Resources\ChildResource;
+use App\Models\Guardian;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreOrderRequest extends FormRequest
@@ -13,7 +15,12 @@ class StoreOrderRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        // $guardian = Guardian::where('email', $this->user()->email)->first();
+        // if ($guardian) {
+        //     $children = $guardian->children;
+        // }
+        // return $children->count() > 0;
+        return true;
     }
 
     /**
@@ -23,8 +30,32 @@ class StoreOrderRequest extends FormRequest
      */
     public function rules()
     {
+        // $children = Guardian::where('first_name', 'Jarod')->firstOrFail()->children;
+        // dd($children->pluck('id'));
+
         return [
-            //
+            'childId' => ['required', 'integer', 'exists:children,id',],
+            'totalPrice' => ['required', 'numeric'],
+            'food' => ['required', 'array'],
+            'food.*.id' => ['integer', 'exists:food,id'],
+            'food.*.name' => ['string', 'exists:food,name'],
+            'food.*.description' => ['string', 'exists:food,description'],
+            'food.*.price' => ['numeric', 'exists:food,price']
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $merge = [];
+
+        if ($this->has('childId')) {
+            $merge['child_id'] = $this->input('childId');
+        }
+
+        if ($this->has('totalPrice')) {
+            $merge['total_price'] = $this->input('totalPrice');
+        }
+
+        $this->merge($merge);
     }
 }

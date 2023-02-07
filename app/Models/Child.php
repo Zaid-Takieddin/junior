@@ -31,4 +31,9 @@ class Child extends Model
     {
         return $this->hasOne(ChildImage::class);
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

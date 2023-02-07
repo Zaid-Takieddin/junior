@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Drink extends Model
+class Food extends Model
 {
     use HasFactory;
 
@@ -14,4 +14,9 @@ class Drink extends Model
         'description',
         'price'
     ];
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class)->using(FoodOrder::class)->withTimestamps();
+    }
 }

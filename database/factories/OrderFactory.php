@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Child;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,8 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'child_id' => Child::factory(),
+            'total_price' => $this->faker->numberBetween(100, 100000)
         ];
     }
 }

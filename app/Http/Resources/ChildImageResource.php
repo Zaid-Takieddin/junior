@@ -15,6 +15,7 @@ class ChildImageResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'childId' => $this->child_id,
             'image' => $this->image,
             'child' => new ChildResource($this->whenLoaded('child'))

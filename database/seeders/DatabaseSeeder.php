@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
             // ClassroomSeeder::class,
             ChildSeeder::class,
             BusLineSeeder::class,
-            DrinkSeeder::class,
-            SnackSeeder::class
+            OrderSeeder::class,
+            FoodSeeder::class
         ]);
     }
 }

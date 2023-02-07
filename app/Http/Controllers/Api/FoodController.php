@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Snack;
-use App\Http\Requests\StoreSnackRequest;
-use App\Http\Requests\UpdateSnackRequest;
-use App\Http\Resources\SnackCollection;
-use App\Http\Resources\SnackResource;
+use App\Models\Food;
+use App\Http\Requests\StoreFoodRequest;
+use App\Http\Requests\UpdateFoodRequest;
+use App\Http\Resources\FoodCollection;
+use App\Http\Resources\FoodResource;
 
-class SnackController extends Controller
+class FoodController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class SnackController extends Controller
      */
     public function index()
     {
-        return new SnackCollection(Snack::all());
+        return new FoodCollection(Food::all());
     }
 
     /**
@@ -34,32 +34,32 @@ class SnackController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreSnackRequest  $request
+     * @param  \App\Http\Requests\StoreFoodRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreSnackRequest $request)
+    public function store(StoreFoodRequest $request)
     {
-        return new SnackResource(Snack::create($request->all()));
+        return new FoodResource(Food::create($request->all()));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Snack  $snack
+     * @param  \App\Models\Food  $food
      * @return \Illuminate\Http\Response
      */
-    public function show(Snack $snack)
+    public function show(Food $food)
     {
-        return new SnackResource($snack);
+        return new FoodResource($food);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Snack  $snack
+     * @param  \App\Models\Food  $food
      * @return \Illuminate\Http\Response
      */
-    public function edit(Snack $snack)
+    public function edit(Food $food)
     {
         //
     }
@@ -67,23 +67,23 @@ class SnackController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateSnackRequest  $request
-     * @param  \App\Models\Snack  $snack
+     * @param  \App\Http\Requests\UpdateFoodRequest  $request
+     * @param  \App\Models\Food  $food
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSnackRequest $request, Snack $snack)
+    public function update(UpdateFoodRequest $request, Food $food)
     {
-        return $snack->updateOrFail($request->all());
+        return $food->updateOrFail($request->all());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Snack  $snack
+     * @param  \App\Models\Food  $food
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Snack $snack)
+    public function destroy(Food $food)
     {
-        return $snack->deleteOrFail();
+        return $food->deleteOrFail();
     }
 }

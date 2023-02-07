@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Drink;
+use App\Models\Food;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class DrinkPolicy
+class FoodPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class DrinkPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Drink  $drink
+     * @param  \App\Models\Food  $food
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Drink $drink)
+    public function view(User $user, Food $food)
     {
         //
     }
@@ -48,10 +48,10 @@ class DrinkPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Drink  $drink
+     * @param  \App\Models\Food  $food
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Drink $drink)
+    public function update(User $user, Food $food)
     {
         //
     }
@@ -60,10 +60,10 @@ class DrinkPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Drink  $drink
+     * @param  \App\Models\Food  $food
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Drink $drink)
+    public function delete(User $user, Food $food)
     {
         //
     }
@@ -72,10 +72,10 @@ class DrinkPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Drink  $drink
+     * @param  \App\Models\Food  $food
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Drink $drink)
+    public function restore(User $user, Food $food)
     {
         //
     }
@@ -84,10 +84,10 @@ class DrinkPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Drink  $drink
+     * @param  \App\Models\Food  $food
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Drink $drink)
+    public function forceDelete(User $user, Food $food)
     {
         //
     }
