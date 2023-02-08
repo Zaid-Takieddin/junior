@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Resources\ChildResource;
-use App\Models\Guardian;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreOrderRequest extends FormRequest
