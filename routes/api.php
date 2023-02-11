@@ -10,6 +10,10 @@ use App\Http\Controllers\Api\FoodController;
 use App\Http\Controllers\Api\LineSupervisorController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\TeacherController;
+use App\Http\Controllers\Api\HomeworkAnswerController;
+use App\Http\Controllers\Api\HomeworkController;
+use App\Http\Controllers\Api\ReportController;
+use App\Http\Controllers\Api\TeacherCertificateController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -38,7 +42,12 @@ Route::group(['namespace' => 'App\Http\Controllers\Api', /*'middleware' => 'auth
     Route::apiResource('line-supervisors', LineSupervisorController::class);
     Route::apiResource('orders', OrderController::class);
     Route::apiResource('food', FoodController::class);
+    Route::apiResource('homeworks', HomeworkController::class);
+    Route::apiResource('reports', ReportController::class);
+    Route::apiResource('homework-answers', HomeworkAnswerController::class);
+    Route::apiResource('teacher-certificates', TeacherCertificateController::class);
     Route::apiResource('child-images', ChildImageController::class)->except('update');
+    Route::apiResource('teacher-certificates', TeacherCertificateController::class)->except('update');
     Route::post('/child-images/{id}', [ChildImageController::class, 'update']);
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateFoodRequest extends FormRequest
 {
@@ -28,7 +29,9 @@ class UpdateFoodRequest extends FormRequest
             return [
                 'name' => ['required', 'string', 'unique:foods,name'],
                 'description' => ['required', 'string'],
-                'price' => ['required', 'numeric']
+                'type' => ['required', 'string', Rule::in('meal', 'drink')],
+                'price' => ['required', 'numeric'],
+                'image' => ['required', 'file', 'image', 'max:2048']
             ];
         }
 
@@ -36,7 +39,9 @@ class UpdateFoodRequest extends FormRequest
             return [
                 'name' => ['sometimes', 'required', 'string', 'unique:foods,name'],
                 'description' => ['sometimes', 'required', 'string'],
-                'price' => ['sometimes', 'required', 'numeric']
+                'type' => ['required', 'string', Rule::in('meal', 'drink')],
+                'price' => ['sometimes', 'required', 'numeric'],
+                'image' => ['sometimes', 'required', 'file', 'image', 'max:2048']
             ];
         }
     }

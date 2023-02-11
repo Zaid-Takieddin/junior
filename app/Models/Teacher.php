@@ -21,4 +21,9 @@ class Teacher extends Model
     {
         return $this->hasOne(Classroom::class);
     }
+
+    public function certificates()
+    {
+        return $this->hasMany(TeacherCertificate::class);
+    }
 }

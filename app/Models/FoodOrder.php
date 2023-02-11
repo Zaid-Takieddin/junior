@@ -16,6 +16,8 @@ class FoodOrder extends Pivot
     protected $fillable = [
         'order_id',
         'food_id',
+        'name',
+        'description',
         'price'
     ];
 }

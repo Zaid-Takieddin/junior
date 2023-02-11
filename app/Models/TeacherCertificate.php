@@ -5,27 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Classroom extends Model
+class TeacherCertificate extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'teacher_id',
-        'level'
+        'certificate'
     ];
-
-    public function children()
-    {
-        return $this->hasMany(Child::class);
-    }
 
     public function teacher()
     {
         return $this->belongsTo(Teacher::class);
-    }
-
-    public function homeworks()
-    {
-        return $this->hasMany(Homework::class);
     }
 }

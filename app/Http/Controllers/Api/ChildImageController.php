@@ -108,6 +108,10 @@ class ChildImageController extends Controller
      */
     public function destroy(ChildImage $childImage)
     {
-        return $childImage->deleteOrFail();
+        if (Storage::disk('public')->delete($this->FOLDER . '/' . basename($childImage->image))) {
+            return $childImage->deleteOrFail();
+        } else {
+            return 'image not found';
+        }
     }
 }

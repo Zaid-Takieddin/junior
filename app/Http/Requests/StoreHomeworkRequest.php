@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class StoreFoodRequest extends FormRequest
+class StoreHomeworkRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,20 +24,20 @@ class StoreFoodRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'unique:foods,name'],
+            'classroomId' => ['required', 'string', 'exists:classrooms,id'],
+            'name' => ['required', 'string'],
             'description' => ['required', 'string'],
-            'type' => ['required', 'string', Rule::in('meal', 'drink')],
-            'price' => ['required', 'numeric'],
-            'image' => ['required', 'file', 'image', 'max:2048']
+            'attachment' => ['required', 'file', 'max:2048'],
+            'expiration' => ['required', 'date']
         ];
     }
 
-    protected function prepareForValidation()
+    public function prepareForValidation()
     {
         $merge = [];
 
-        if ($this->has('description')) {
-            $merge['description'] = preg_replace('/\s+/', '', $this->input('description'));
+        if ($this->has('classroomId')) {
+            $merge['classroom_id'] = $this->input('classroomId');
         }
 
         $this->merge($merge);

@@ -42,24 +42,21 @@ class OrderController extends Controller
     {
         $order = Order::create($request->except('food'));
         $food = $request->input('food');
-        // dd($order->id);
-        $pivotData = [];
-        // $attachedIds = [];
+
         foreach ($food as $single_food) {
-            // dd($single_food['id']);
+
+            $pivotData = [];
+
             $pivotData['order_id'] = $order->id;
             $pivotData['food_id'] = $single_food['id'];
+            $pivotData['name'] = $single_food['name'];
+            $pivotData['description'] = $single_food['description'];
             $pivotData['price'] = $single_food['price'];
-            // array_push($attachedIds, $single_food['id']);
+
             FoodOrder::create($pivotData);
         }
-        // dd($attachedIds);
-        // FoodOrder::create($pivotData);
-        $attachedIds = FoodOrder::where('order_id', $order->id)->get()->map->only('id', 'price');
-        // dd($attachedIds);
-        $order->items()->attach($attachedIds);
-        return new OrderResource($order);
-        // return new OrderResource(Order::create($request->all()));
+
+        return new OrderResource($order->loadMissing('items'));
     }
 
     /**

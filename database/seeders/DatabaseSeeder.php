@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\TeacherCertificate;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,7 +23,9 @@ class DatabaseSeeder extends Seeder
             ChildSeeder::class,
             BusLineSeeder::class,
             OrderSeeder::class,
-            FoodSeeder::class
+            FoodSeeder::class,
+            ReportSeeder::class,
+            TeacherCertificateSeeder::class
         ]);
     }
 }

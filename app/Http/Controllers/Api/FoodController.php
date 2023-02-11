@@ -8,9 +8,11 @@ use App\Http\Requests\StoreFoodRequest;
 use App\Http\Requests\UpdateFoodRequest;
 use App\Http\Resources\FoodCollection;
 use App\Http\Resources\FoodResource;
+use Illuminate\Support\Facades\Storage;
 
 class FoodController extends Controller
 {
+    private $FOLDER = 'food';
     /**
      * Display a listing of the resource.
      *
@@ -39,7 +41,15 @@ class FoodController extends Controller
      */
     public function store(StoreFoodRequest $request)
     {
-        return new FoodResource(Food::create($request->all()));
+        $data = $request->all();
+
+        $image = $request->file('image');
+        $imageName = time() . '.' . $image->extension();
+        $image->storeAs('public/' . $this->FOLDER . '/' . $request->input('type'), $imageName);
+
+        $data['image'] = asset('storage/' . $this->FOLDER . '/' . $request->input('type') . '/' . $imageName);
+
+        return new FoodResource(Food::create($data));
     }
 
     /**
@@ -73,7 +83,23 @@ class FoodController extends Controller
      */
     public function update(UpdateFoodRequest $request, Food $food)
     {
-        return $food->updateOrFail($request->all());
+        $image_exists = Storage::disk('public')->exists($this->FOLDER . '/' . $food->type . '/' .  basename($food->image));
+
+        if ($image_exists) {
+            return $food->updateOrFail($request->all());
+        } else {
+            Storage::disk('public')->delete($this->FOLDER . '/' . $food->type . '/' .  basename($food->image));
+
+            $data = $request->all();
+
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->extension();
+            $image->storeAs('public/' . $this->FOLDER . '/' . $request->input('type'), $imageName);
+
+            $data['image'] = asset('storage/' . $this->FOLDER . '/' . $request->input('type') . '/' . $imageName);
+
+            return $food->updateOrFail($data);
+        }
     }
 
     /**
@@ -84,6 +110,10 @@ class FoodController extends Controller
      */
     public function destroy(Food $food)
     {
-        return $food->deleteOrFail();
+        if (Storage::disk('public')->delete($this->FOLDER . '/' . $food->type . '/' .  basename($food->image))) {
+            return $food->deleteOrFail();
+        } else {
+            return 'image not found';
+        }
     }
 }

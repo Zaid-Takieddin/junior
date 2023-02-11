@@ -24,7 +24,8 @@ class ChildResource extends JsonResource
             'guardian' => new GuardianResource($this->whenLoaded('guardian')),
             'classroom' => new ClassroomResource($this->whenLoaded('classroom')),
             'image' => new ChildImageResource($this->whenLoaded('image')),
-            'orders' => new OrderCollection($this->whenLoaded('orders'))
+            'orders' => new OrderCollection($this->whenLoaded('orders')),
+            'reports' => new ReportCollection($this->whenLoaded('reports'))
         ];
     }
 }

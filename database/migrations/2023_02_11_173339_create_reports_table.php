@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Food;
-use App\Models\Order;
+use App\Models\Child;
+use App\Models\Teacher;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,13 +15,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('food_order', function (Blueprint $table) {
+        Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Order::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Food::class);
-            $table->string('name');
+            $table->foreignIdFor(Child::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Teacher::class, 'reporter');
             $table->string('description');
-            $table->unsignedFloat('price');
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('food_order');
+        Schema::dropIfExists('reports');
     }
 };

@@ -12,11 +12,13 @@ class Food extends Model
     protected $fillable = [
         'name',
         'description',
-        'price'
+        'price',
+        'type',
+        'image'
     ];
 
     public function orders()
     {
-        return $this->belongsToMany(Order::class)->using(FoodOrder::class)->withTimestamps();
+        return $this->belongsToMany(Order::class)->using(FoodOrder::class)->withPivot('name', 'description', 'price')->withTimestamps();
     }
 }

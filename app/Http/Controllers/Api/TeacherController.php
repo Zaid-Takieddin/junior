@@ -50,7 +50,7 @@ class TeacherController extends Controller
      */
     public function show(Teacher $teacher)
     {
-        return new TeacherResource($teacher->loadMissing('classroom'));
+        return new TeacherResource($teacher->loadMissing(['classroom', 'certificates']));
     }
 
     /**

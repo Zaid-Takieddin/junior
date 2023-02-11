@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Report extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'child_id',
-        'total_price'
+        'reporter',
+        'description'
     ];
 
     public function child()
@@ -19,8 +20,8 @@ class Order extends Model
         return $this->belongsTo(Child::class);
     }
 
-    public function items()
+    public function reporter()
     {
-        return $this->belongsToMany(Food::class)->using(FoodOrder::class)->withPivot('name', 'description', 'price')->withTimestamps();
+        return $this->belongsTo(Teacher::class);
     }
 }
