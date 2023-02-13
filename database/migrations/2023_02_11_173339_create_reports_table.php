@@ -18,7 +18,7 @@ return new class extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Child::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Teacher::class, 'reporter');
+            $table->foreignIdFor(Teacher::class);
             $table->string('description');
             $table->timestamps();
         });

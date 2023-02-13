@@ -16,8 +16,10 @@ class ClassroomSeeder extends Seeder
     public function run()
     {
         Classroom::factory()
+            // ->hasChildren(8)
+            // ->hasHomeworks(1)
             ->count(10)
-            // ->hasTeacher(10)
+            ->forTeacher()
             ->create();
     }
 }

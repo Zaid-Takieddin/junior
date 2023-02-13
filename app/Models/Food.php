@@ -19,6 +19,6 @@ class Food extends Model
 
     public function orders()
     {
-        return $this->belongsToMany(Order::class)->using(FoodOrder::class)->withPivot('name', 'description', 'price')->withTimestamps();
+        return $this->belongsToMany(Order::class, 'food_order', 'food_id', 'order_id');
     }
 }

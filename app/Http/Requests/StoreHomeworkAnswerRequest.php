@@ -26,7 +26,7 @@ class StoreHomeworkAnswerRequest extends FormRequest
         return [
             'homeworkId' => ['required', 'string', 'exists:homework,id'],
             'childId' => ['required', 'string', 'exists:children,id'],
-            'answer' => ['required', 'file', 'max:2048']
+            // 'answer' => ['required', 'file', 'max:2048']
         ];
     }
 

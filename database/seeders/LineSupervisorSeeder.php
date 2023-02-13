@@ -16,7 +16,7 @@ class LineSupervisorSeeder extends Seeder
     public function run()
     {
         LineSupervisor::factory()
-            ->count(10)
+            ->hasBusLine()
             ->create();
     }
 }

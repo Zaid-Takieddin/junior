@@ -16,7 +16,12 @@ class ChildSeeder extends Seeder
     public function run()
     {
         Child::factory()
-            ->count(25)
+            ->count(10)
+            ->forGuardian()
+            ->forClassroom()
+            ->hasImage()
+            ->hasOrders(1)
+            ->hasReports(3)
             ->create();
     }
 }

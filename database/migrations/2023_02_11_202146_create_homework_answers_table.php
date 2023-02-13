@@ -19,7 +19,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Homework::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Child::class)->constrained()->cascadeOnDelete();
-            $table->string('answer');
+            $table->string('answer')->nullable();
             $table->timestamps();
         });
     }

@@ -26,4 +26,9 @@ class Teacher extends Model
     {
         return $this->hasMany(TeacherCertificate::class);
     }
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
 }

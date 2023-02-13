@@ -24,6 +24,6 @@ class Homework extends Model
 
     public function answers()
     {
-        return $this->hasMany(HomeworkAnswers::class);
+        return $this->hasMany(HomeworkAnswer::class);
     }
 }

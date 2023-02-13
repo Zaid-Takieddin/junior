@@ -16,7 +16,15 @@ class GuardianSeeder extends Seeder
     public function run()
     {
         Guardian::factory()
-                ->count(25)
-                ->create();
+            ->hasChildren(3)
+            ->create();
+
+        Guardian::factory()
+            ->hasChildren(2)
+            ->create();
+
+        Guardian::factory()
+            ->hasChildren(1)
+            ->create();
     }
 }

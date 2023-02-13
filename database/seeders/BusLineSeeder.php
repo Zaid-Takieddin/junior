@@ -17,6 +17,7 @@ class BusLineSeeder extends Seeder
     {
         BusLine::factory()
             ->count(10)
+            ->forLineSupervisor()
             ->create();
     }
 }

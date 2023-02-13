@@ -15,6 +15,9 @@ class TeacherCertificateSeeder extends Seeder
      */
     public function run()
     {
-        TeacherCertificate::factory()->count(25)->create();
+        TeacherCertificate::factory()
+            ->count(10)
+            ->forTeacher()
+            ->create();
     }
 }

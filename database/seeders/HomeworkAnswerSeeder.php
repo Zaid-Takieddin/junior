@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\HomeworkAnswer;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +15,10 @@ class HomeworkAnswerSeeder extends Seeder
      */
     public function run()
     {
-        //
+        HomeworkAnswer::factory()
+            ->count(1)
+            ->forHomework()
+            ->forChild()
+            ->create();
     }
 }

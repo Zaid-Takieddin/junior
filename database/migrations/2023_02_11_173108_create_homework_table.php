@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Classroom::class)->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('description');
-            $table->string('attachment');
+            $table->string('attachment')->nullable();
             $table->date('expiration');
             $table->timestamps();
         });

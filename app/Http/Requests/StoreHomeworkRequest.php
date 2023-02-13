@@ -27,7 +27,7 @@ class StoreHomeworkRequest extends FormRequest
             'classroomId' => ['required', 'string', 'exists:classrooms,id'],
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
-            'attachment' => ['required', 'file', 'max:2048'],
+            // 'attachment' => ['required', 'file', 'max:2048'],
             'expiration' => ['required', 'date']
         ];
     }

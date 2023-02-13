@@ -13,6 +13,8 @@ class FoodOrder extends Pivot
      */
     public $incrementing = true;
 
+    protected $table = 'food_order';
+
     protected $fillable = [
         'order_id',
         'food_id',

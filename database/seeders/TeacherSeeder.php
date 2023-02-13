@@ -16,7 +16,9 @@ class TeacherSeeder extends Seeder
     public function run()
     {
         Teacher::factory()
-            ->count(25)
+            ->hasClassroom()
+            ->hasCertificates(3)
+            ->hasReports(2)
             ->create();
     }
 }

@@ -20,7 +20,7 @@ class Report extends Model
         return $this->belongsTo(Child::class);
     }
 
-    public function reporter()
+    public function teacher()
     {
         return $this->belongsTo(Teacher::class);
     }

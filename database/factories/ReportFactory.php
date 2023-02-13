@@ -20,7 +20,7 @@ class ReportFactory extends Factory
     {
         return [
             'child_id' => Child::factory(),
-            'reporter' => Teacher::factory(),
+            'teacher_id' => Teacher::factory(),
             'description' => $this->faker->text()
         ];
     }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Food;
+use App\Models\Order;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,7 +17,7 @@ class FoodSeeder extends Seeder
     public function run()
     {
         Food::factory()
-            ->count(25)
+            ->count(10)
             ->create();
     }
 }
