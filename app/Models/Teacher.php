@@ -31,4 +31,9 @@ class Teacher extends Model
     {
         return $this->hasMany(Report::class);
     }
+
+    public function children()
+    {
+        return $this->hasManyThrough(Child::class, Classroom::class);
+    }
 }

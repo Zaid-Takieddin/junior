@@ -17,7 +17,9 @@ class BusLineResource extends JsonResource
         return [
             'id' => $this->id,
             'lineSupervisorId' => $this->line_supervisor_id,
-            'name' => $this->name
+            'name' => $this->name,
+            'children' => new ChildCollection($this->whenLoaded('children')),
+            'lineSupervisor' => new LineSupervisorResource($this->whenLoaded('lineSupervisor'))
         ];
     }
 }

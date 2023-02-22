@@ -50,7 +50,7 @@ class BusLineController extends Controller
      */
     public function show(BusLine $busLine)
     {
-        return new BusLineResource($busLine);
+        return new BusLineResource($busLine->loadMissing(['children', 'lineSupervisor']));
     }
 
     /**

@@ -20,6 +20,7 @@ class HomeworkResource extends JsonResource
             'description' => $this->description,
             'expiration' => $this->expiration,
             'attachment' => $this->attachment,
+            'createdAt' => $this->created_at,
             'answers' => new HomeworkAnswerCollection($this->whenLoaded('answers')),
             'classroom' => new ClassroomResource($this->whenLoaded('classroom'))
         ];

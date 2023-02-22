@@ -41,4 +41,9 @@ class Child extends Model
     {
         return $this->hasMany(Report::class);
     }
+
+    public function busLine()
+    {
+        return $this->belongsTo(BusLine::class);
+    }
 }

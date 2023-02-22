@@ -19,6 +19,7 @@ class ChildResource extends JsonResource
             'firstName' => $this->first_name,
             'guaridanId' => $this->guardian_id,
             'classroomId' => $this->classroom_id,
+            'busLineId' => $this->bus_line_id,
             'status' => $this->status,
             'birthDate' => $this->birth_date,
             'guardian' => new GuardianResource($this->whenLoaded('guardian')),

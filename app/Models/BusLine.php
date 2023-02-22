@@ -9,7 +9,13 @@ class BusLine extends Model
 {
     use HasFactory;
 
-    public function lineSupervisor() {
+    public function lineSupervisor()
+    {
         return $this->belongsTo(LineSupervisor::class);
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Child::class);
     }
 }

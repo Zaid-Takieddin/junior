@@ -59,7 +59,7 @@ class ChildController extends Controller
      */
     public function show(Child $child)
     {
-        return new ChildResource($child->loadMissing(['guardian', 'classroom', 'image', 'orders', 'reports']));
+        return new ChildResource($child->loadMissing(['guardian', 'classroom', 'image', 'orders', 'reports', 'busLine']));
     }
 
     /**

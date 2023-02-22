@@ -21,7 +21,8 @@ class TeacherResource extends JsonResource
             'birthDate' => $this->birth_date,
             'address' => $this->address,
             'phoneNumber' => $this->phone_number,
-            'classroom' => new ClassroomResource($this->whenLoaded('classroom'))
+            'classroom' => new ClassroomResource($this->whenLoaded('classroom')),
+            'children' => new ChildCollection($this->whenLoaded('children'))
         ];
     }
 }

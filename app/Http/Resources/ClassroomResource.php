@@ -19,7 +19,8 @@ class ClassroomResource extends JsonResource
             'teacherId' => $this->teacher_id,
             'level' => $this->level,
             'teacher' => new TeacherResource($this->whenLoaded('teacher')),
-            'children' => new ChildCollection($this->whenLoaded('children'))
+            'children' => new ChildCollection($this->whenLoaded('children')),
+            'homeworks' => new HomeworkCollection($this->whenLoaded('homeworks'))
         ];
     }
 }

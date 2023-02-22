@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\BusLine;
 use App\Models\Classroom;
 use App\Models\Guardian;
 use Illuminate\Database\Migrations\Migration;
@@ -19,6 +20,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Guardian::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Classroom::class);
+            $table->foreignIdFor(BusLine::class);
             $table->string('first_name');
             $table->string('status');
             $table->dateTime('birth_date');

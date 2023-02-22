@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\BusLine;
 use App\Models\Guardian;
 use App\Models\Classroom;
 use App\Models\Order;
@@ -22,6 +23,7 @@ class ChildFactory extends Factory
         return [
             'guardian_id' => Guardian::factory(),
             'classroom_id' => Classroom::factory(),
+            'bus_line_id' => BusLine::factory(),
             'first_name' => $this->faker->firstName(),
             'status' => $this->faker->randomElement(['S', 'B', 'H']),
             'birth_date' => $this->faker->date(),
